@@ -13,11 +13,24 @@ Today I was working on an Azure project where the deployment of Azure resources 
 
 ## Problem
 
-You'll see the following error message: `ERROR: New-AzureRmResourceGroupDeployment : 7:27:39 AM - Resource Microsoft.Compute/virtualMachines/extensions` `'test01/dscExtension' failed with message '{` `"status": "Failed",` `"error": {` `"code": "ResourceDeploymentFailure",` `"message": "The resource operation completed with terminal provisioning state 'Failed'.",` `"details": [` `{` `"code": "VMExtensionProvisioningError",` `"message": "VM has reported a failure when processing extension 'dscExtension'.
+You'll see the following error message:
 
-Error message: \"The DSC``Extension failed to execute: **Cannot process argument transformation on parameter 'ConfigurationFunction'**.
-
-Cannot`convert value to type System.String..\r\nMore information about the failure can be found in the logs located under`'C:\\WindowsAzure\\Logs\\Plugins\\Microsoft.Powershell.DSC\\2.19.0.0' on the VM.\"."`}`]`}`}'`
+```text
+ERROR: New-AzureRmResourceGroupDeployment : 7:27:39 AM - Resource Microsoft.Compute/virtualMachines/extensions
+'test01/dscExtension' failed with message '{
+  "status": "Failed",
+  "error": {
+    "code": "ResourceDeploymentFailure",
+    "message": "The resource operation completed with terminal provisioning state 'Failed'.",
+    "details": [
+      {
+        "code": "VMExtensionProvisioningError",
+        "message": "VM has reported a failure when processing extension 'dscExtension'. Error message: \"The DSC Extension failed to execute: Cannot process argument transformation on parameter 'ConfigurationFunction'. Cannot convert value to type System.String..\r\nMore information about the failure can be found in the logs located under 'C:\\WindowsAzure\\Logs\\Plugins\\Microsoft.Powershell.DSC\\2.19.0.0' on the VM.\"."
+      }
+    ]
+  }
+}'
+```
 
 ## Solution
 

@@ -15,15 +15,20 @@ Multicast during an SCCM 2012 R2 SP1 (1511 release) Task Sequence fails with err
 
 ### SMSTS.log file contents
 
-`CLibSMSMessageWinHttpTransport::Send: URL: SCCM01.CORP.DOMAIN.COM:443 CCM_POST /SMS_MCS_AltAuth/.sms_mcs?op=keyinfo ApplyOperatingSystem 15-4-2016 9:02:57 656 (0x0290)` `In SSL, but with no client cert ApplyOperatingSystem 15-4-2016 9:02:57 656 (0x0290)` `Request was successful.
-
-ApplyOperatingSystem 15-4-2016 9:02:57 656 (0x0290)`pNext != NULL, HRESULT=80004005 (e:\nts_sccm_release\sms\framework\osdmessaging\libsmsmessaging.cpp,2054) ApplyOperatingSystem 15-4-2016 9:02:57 656 (0x0290)`reply has no message header marker ApplyOperatingSystem 15-4-2016 9:02:57 656 (0x0290)`DoRequest (sReply, true), HRESULT=80004005 (e:\nts_sccm_release\sms\framework\osdmessaging\libsmsmessaging.cpp,10358) ApplyOperatingSystem 15-4-2016 9:02:57 656 (0x0290)`oMcsRequest.GetMCSKey(mcsKeyInfoResponse), HRESULT=80004005 (e:\nts_sccm_release\sms\server\mcs\consumer\mcsisapiclient.cpp,429) ApplyOperatingSystem 15-4-2016 9:02:57 656 (0x0290)`Failed to get MCS key (Code 0x80004005) ApplyOperatingSystem 15-4-2016 9:02:57 656 (0x0290)`ClientRequestToMCS::DoRequest failed. error = (0x80004005).
-
-ApplyOperatingSystem 15-4-2016 9:02:57 656 (0x0290)``Request to MCS 'SCCM01.CORP.DOMAIN.COM' failed with error (Code 0x80004005).
-
-ApplyOperatingSystem 15-4-2016 9:02:57 656 (0x0290)``Multicast OpenSessionRequest failed (0x80004005).
-
-ApplyOperatingSystem 15-4-2016 9:02:57 656 (0x0290)``Sending status message: SMS_OSDeployment_PackageDownloadMulticastStatusFail ApplyOperatingSystem 15-4-2016 9:02:57 656 (0x0290)`
+```text
+CLibSMSMessageWinHttpTransport::Send: URL: SCCM01.CORP.DOMAIN.COM:443 CCM_POST /SMS_MCS_AltAuth/.sms_mcs?op=keyinfo ApplyOperatingSystem 15-4-2016 9:02:57 656 (0x0290)
+In SSL, but with no client cert ApplyOperatingSystem 15-4-2016 9:02:57 656 (0x0290)
+Request was successful. ApplyOperatingSystem 15-4-2016 9:02:57 656 (0x0290)
+pNext != NULL, HRESULT=80004005 (e:\nts_sccm_release\sms\framework\osdmessaging\libsmsmessaging.cpp,2054) ApplyOperatingSystem 15-4-2016 9:02:57 656 (0x0290)
+reply has no message header marker ApplyOperatingSystem 15-4-2016 9:02:57 656 (0x0290)
+DoRequest (sReply, true), HRESULT=80004005 (e:\nts_sccm_release\sms\framework\osdmessaging\libsmsmessaging.cpp,10358) ApplyOperatingSystem 15-4-2016 9:02:57 656 (0x0290)
+oMcsRequest.GetMCSKey(mcsKeyInfoResponse), HRESULT=80004005 (e:\nts_sccm_release\sms\server\mcs\consumer\mcsisapiclient.cpp,429) ApplyOperatingSystem 15-4-2016 9:02:57 656 (0x0290)
+Failed to get MCS key (Code 0x80004005) ApplyOperatingSystem 15-4-2016 9:02:57 656 (0x0290)
+ClientRequestToMCS::DoRequest failed. error = (0x80004005). ApplyOperatingSystem 15-4-2016 9:02:57 656 (0x0290)
+Request to MCS 'SCCM01.CORP.DOMAIN.COM' failed with error (Code 0x80004005). ApplyOperatingSystem 15-4-2016 9:02:57 656 (0x0290)
+Multicast OpenSessionRequest failed (0x80004005). ApplyOperatingSystem 15-4-2016 9:02:57 656 (0x0290)
+Sending status message: SMS_OSDeployment_PackageDownloadMulticastStatusFail ApplyOperatingSystem 15-4-2016 9:02:57 656 (0x0290)
+```
 
 ### Solution
 
