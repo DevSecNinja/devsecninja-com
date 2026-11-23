@@ -70,6 +70,11 @@ jobs:
 
   gitleaks:
     name: gitleaks
+    # Pull requests scan only their own commits, so findings in older history
+    # don't fail unrelated PRs. The Secret scan workflow re-scans the full
+    # history on main, weekly and on dispatch, with findings in code scanning
+    # instead of this public log.
+    if: ${{ github.event_name == 'pull_request' }}
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout code
@@ -86,7 +91,15 @@ jobs:
           version: 2026.11.3
 
       - name: Run gitleaks
-        run: mise exec -- gitleaks detect --redact
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          BASE_REF: ${{ github.base_ref }}
+        # Also skip commits on the base branch's current tip, which a PR may
+        # have merged in after its base SHA.
+        run: >-
+          mise exec -- gitleaks detect --redact
+          --log-opts="${HEAD_SHA} --not ${BASE_SHA} origin/${BASE_REF}"
 
   shellcheck:
     name: shellcheck
